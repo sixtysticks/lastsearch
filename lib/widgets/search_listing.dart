@@ -39,7 +39,7 @@ class SearchListing extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.grey,
-            backgroundImage: buildAvatarImage(searchResult.url),
+            backgroundImage: buildAvatarImage(searchResult.image),
             radius: 28,
           ),
           title: Text(

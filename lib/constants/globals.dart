@@ -3,7 +3,6 @@ library lastsearch.globals;
 // Golbal Strings
 const String appName = 'last.search';
 const String defaultFontName = 'Barlow';
-const String resultsTitle = 'Results';
 
 // Measurements
 const double spacer = 20.0;

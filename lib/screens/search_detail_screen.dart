@@ -18,7 +18,7 @@ class SearchDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(globals.resultsTitle),
+        title: const Text(globals.appName),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: SizedBox(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:lastsearch/constants/globals.dart' as globals;
 import 'package:lastsearch/constants/theme.dart';
+import 'package:lastsearch/providers/loading_state.dart';
 import 'package:lastsearch/providers/search_type_state.dart';
 import 'package:lastsearch/screens/results_screen.dart';
 import 'package:lastsearch/widgets/search_radio.dart';
@@ -102,12 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, anim1, anim2) => const ResultsScreen(searchQuery: 'Dolly'),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ResultsScreen(searchQuery: 'Dolly')));
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),

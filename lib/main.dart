@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lastsearch/providers/loading_state.dart';
 import 'package:lastsearch/providers/search_results_provider.dart';
 import 'package:lastsearch/providers/search_type_state.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => SearchTypeState()),
         ChangeNotifierProvider(create: (context) => SearchResultsProvider()),
+        ChangeNotifierProvider(create: (context) => LoadingState()),
       ],
       child: MaterialApp(
         title: globals.appName,
