@@ -11,3 +11,4 @@ const double halfSpacer = spacer / 2;
 // Route Names
 const String homeRoute = '/home';
 const String resultsRoute = '/results';
+const String resultDetail = '/result_detail';

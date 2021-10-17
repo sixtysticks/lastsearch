@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lastsearch/providers/search_type_state.dart';
 import 'package:provider/provider.dart';
 
 import 'package:lastsearch/providers/search_results_provider.dart';
-import 'package:lastsearch/screens/search_detail_screen.dart';
+import 'package:lastsearch/views/result_detail_screen.dart';
 import 'package:lastsearch/constants/globals.dart' as globals;
 
 class SearchListing extends StatelessWidget {
@@ -14,7 +15,7 @@ class SearchListing extends StatelessWidget {
   }) : super(key: key);
 
   ImageProvider<Object> buildAvatarImage(String? photoUrl) {
-    if (photoUrl == null) {
+    if (photoUrl == null || photoUrl == "") {
       return const AssetImage(
         'assets/images/placeholder-image.jpeg',
       );
@@ -25,11 +26,12 @@ class SearchListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final searchResult = Provider.of<SearchResultsProvider>(context).findById(resultId);
+    final searchType = Provider.of<SearchTypeState>(context).getSearchType();
 
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(
-          SearchDetailScreen.routeName,
+          ResultDetailScreen.routeName,
           arguments: searchResult.id,
         );
       },
@@ -44,10 +46,18 @@ class SearchListing extends StatelessWidget {
           ),
           title: Text(
             searchResult.name,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline2,
           ),
+          subtitle: searchType == SearchType.artist
+              ? null
+              : Text(
+                  searchResult.artist!,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headline3,
+                ),
         ),
       ),
     );

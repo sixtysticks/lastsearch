@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-enum SearchType { album, song, artist }
+enum SearchType { album, track, artist }
 
 class SearchTypeState with ChangeNotifier {
   SearchType search;

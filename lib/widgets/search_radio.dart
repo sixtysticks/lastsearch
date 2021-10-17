@@ -29,7 +29,6 @@ class SearchRadio extends StatelessWidget {
       dense: true,
       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       leading: Radio<SearchType>(
-        focusColor: Colors.blue,
         value: _value,
         groupValue: _search,
         onChanged: (value) {

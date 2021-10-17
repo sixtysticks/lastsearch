@@ -27,7 +27,7 @@ class SearchList extends StatelessWidget {
                       padding: const EdgeInsets.all(globals.spacer),
                       child: Text(
                         emptyListMessage,
-                        style: Theme.of(context).textTheme.headline3,
+                        style: Theme.of(context).textTheme.headline2,
                         textAlign: TextAlign.center,
                       ),
                     ),

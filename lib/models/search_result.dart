@@ -6,7 +6,7 @@ class SearchResult with ChangeNotifier {
   final String name;
   final String url;
   final String image;
-  final String artist;
+  final String? artist;
 
   SearchResult({
     this.id = '',

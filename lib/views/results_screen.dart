@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lastsearch/providers/loading_state.dart';
-import 'package:lastsearch/widgets/search_list.dart';
+import 'package:lastsearch/providers/search_type_state.dart';
 import 'package:provider/provider.dart';
 
 import 'package:lastsearch/constants/globals.dart' as globals;
+import 'package:lastsearch/providers/loading_state.dart';
 import 'package:lastsearch/providers/search_results_provider.dart';
+import 'package:lastsearch/widgets/search_list.dart';
 
 class ResultsScreen extends StatelessWidget {
   static const routeName = globals.resultsRoute;
@@ -18,36 +19,31 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var searchResultsProvider = Provider.of<SearchResultsProvider>(context, listen: false);
     var loadingStateProvider = Provider.of<LoadingState>(context, listen: false);
+    var searchResultsProvider = Provider.of<SearchResultsProvider>(context, listen: false);
+    var searchType = Provider.of<SearchTypeState>(context, listen: false).getSearchType();
     var dataFetched = searchResultsProvider.fetched;
 
     if (!dataFetched) {
-      searchResultsProvider.fetchSearchResults().then((value) {
-        searchResultsProvider.fetched = true;
+      searchResultsProvider.fetchSearchResults(context).then((value) {
         loadingStateProvider.loading = false;
+        searchResultsProvider.fetched = true;
       });
     }
 
-    final appBarHeight = AppBar().preferredSize.height;
-    final statusBarHeight = MediaQuery.of(context).padding.top;
-    final contentHeight = MediaQuery.of(context).size.height - appBarHeight - statusBarHeight;
-
     return WillPopScope(
       onWillPop: () async {
+        loadingStateProvider.loading = true;
         searchResultsProvider.clearResults();
         searchResultsProvider.fetched = false;
-        loadingStateProvider.loading = true;
         return true;
       },
       child: Consumer<LoadingState>(builder: (context, loadingProvider, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            title: Text('${searchType.name} results'),
           ),
-          body: SizedBox(
-            height: contentHeight,
-            width: double.infinity,
+          body: Container(
             child: loadingProvider.loading
                 ? Column(
                     children: const [
