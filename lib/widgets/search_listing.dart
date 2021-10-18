@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lastsearch/providers/search_type_state.dart';
 import 'package:provider/provider.dart';
 
+import 'package:lastsearch/helpers/image_helper.dart';
 import 'package:lastsearch/providers/search_results_provider.dart';
+import 'package:lastsearch/providers/search_type_state.dart';
 import 'package:lastsearch/views/result_detail_screen.dart';
 import 'package:lastsearch/constants/globals.dart' as globals;
 
@@ -13,15 +14,6 @@ class SearchListing extends StatelessWidget {
     Key? key,
     required this.resultId,
   }) : super(key: key);
-
-  ImageProvider<Object> buildAvatarImage(String? photoUrl) {
-    if (photoUrl == null || photoUrl == "") {
-      return const AssetImage(
-        'assets/images/placeholder-image.jpeg',
-      );
-    }
-    return NetworkImage(photoUrl);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class SearchListing extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.grey,
-            backgroundImage: buildAvatarImage(searchResult.image),
+            backgroundImage: ImageHelper().buildImage(searchResult.image),
             radius: 28,
           ),
           title: Text(
@@ -50,14 +42,14 @@ class SearchListing extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.headline2,
           ),
-          subtitle: searchType == SearchType.artist
-              ? null
-              : Text(
+          subtitle: searchType != SearchType.artist
+              ? Text(
                   searchResult.artist!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headline3,
-                ),
+                )
+              : null,
         ),
       ),
     );

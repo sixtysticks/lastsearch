@@ -10,11 +10,8 @@ import 'package:lastsearch/widgets/search_list.dart';
 class ResultsScreen extends StatelessWidget {
   static const routeName = globals.resultsRoute;
 
-  final String searchQuery;
-
   const ResultsScreen({
     Key? key,
-    required this.searchQuery,
   }) : super(key: key);
 
   @override

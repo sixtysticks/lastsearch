@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lastsearch/providers/search_query_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -23,6 +24,7 @@ class SearchResultsProvider with ChangeNotifier {
   Future<void> fetchSearchResults(BuildContext context) async {
     try {
       final searchType = Provider.of<SearchTypeState>(context).getSearchType();
+      final searchQuery = Provider.of<SearchQueryProvider>(context).searchQuery;
 
       // ignore: prefer_typing_uninitialized_variables
       var searchCategory;
@@ -39,7 +41,8 @@ class SearchResultsProvider with ChangeNotifier {
           break;
       }
 
-      final uri = 'https://ws.audioscrobbler.com/2.0/?method=$searchCategory.search&$searchCategory=oasis&api_key=7e7f8ba22c77bec674a8545942e11a40&format=json';
+      // Note :: My last.fm api key is now disabled, so create your own and add below to test
+      final uri = 'https://ws.audioscrobbler.com/2.0/?method=$searchCategory.search&$searchCategory=$searchQuery&api_key=[--ENTER YOUR LASTFM API KEY HERE--]&format=json';
 
       final response = await http.get(Uri.parse(uri));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;

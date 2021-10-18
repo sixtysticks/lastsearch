@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lastsearch/providers/search_query_provider.dart';
 import 'package:lastsearch/views/result_detail_screen.dart';
 import 'package:lastsearch/views/results_screen.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoadingState()),
+        ChangeNotifierProvider(create: (context) => SearchQueryProvider()),
         ChangeNotifierProvider(create: (context) => SearchResultsProvider()),
         ChangeNotifierProvider(create: (context) => SearchTypeState()),
       ],
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const HomeScreen(),
-          ResultsScreen.routeName: (context) => const ResultsScreen(searchQuery: ''),
+          ResultsScreen.routeName: (context) => const ResultsScreen(),
           ResultDetailScreen.routeName: (context) => const ResultDetailScreen(),
         },
       ),

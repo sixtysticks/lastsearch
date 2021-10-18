@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:lastsearch/constants/theme.dart';
 
 class SearchFormField extends StatelessWidget {
+  final TextEditingController controller;
+
   const SearchFormField({
     Key? key,
+    required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.search,
       style: Theme.of(context).textTheme.headline2,

@@ -10,10 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final appBarHeight = AppBar().preferredSize.height;
-    // final statusBarHeight = MediaQuery.of(context).padding.top;
-    // // final contentHeight = MediaQuery.of(context).size.height - appBarHeight - statusBarHeight;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(globals.appName),
@@ -24,13 +20,13 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Choose whether to search Last.fm for album, track or artist',
+              'Choose whether to search last.fm for album, track or artist',
               style: Theme.of(context).textTheme.headline3,
             ),
             const SizedBox(
               height: globals.halfSpacer,
             ),
-            const SearchForm()
+            const SearchForm(),
           ],
         ),
       ),
